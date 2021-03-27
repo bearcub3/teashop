@@ -10,7 +10,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
   require ( 'login_tools.php' ) ;
 
   # Check login.
-  list ( $check, $data ) = validate ( $dbc, $_POST[ 'email' ], $_POST[ 'pass' ] ) ;
+  list ( $check, $data ) = validate ( $dbc, $_POST[ 'email' ], $_POST[ 'password' ] ) ;
 
   # On success set session data and display logged in page.
   if ( $check )  

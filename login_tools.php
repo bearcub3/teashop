@@ -10,7 +10,7 @@ function load( $page = 'login.php' )
   $parts = parse_url($url);
   
   
-  $newUrl = $parts['scheme'] . '://' . $parts['host'] . $parts['path'] . '/' . $page;;
+  $newUrl = $parts['scheme'] . '://' . $parts['host'] . ':8888' . $parts['path'] . '/' . $page;;
   
   # Execute redirect then quit. 
   header( "Location: $newUrl" ) ; 
@@ -18,19 +18,20 @@ function load( $page = 'login.php' )
 }
 
 # Function to check email address and password. 
-function validate( $dbc, $email = '', $pwd = '')
+function validate( $dbc, $email = '', $pwd = '' )
 {
   # Initialize errors array.
   $errors = array() ; 
+  $type = ['email', 'password', 'no account'];
 
   # Check email field.
   if ( empty( $email ) ) 
-  { $errors[] = 'Enter your email address.' ; } 
+  { $errors[] = $type[0] ; } 
   else  { $e = mysqli_real_escape_string( $dbc, trim( $email ) ) ; }
 
   # Check password field.
   if ( empty( $pwd ) ) 
-  { $errors[] = 'Enter your password.' ; } 
+  { $errors[] = $type[1] ; } 
   else { $p = mysqli_real_escape_string( $dbc, trim( $pwd ) ) ; }
 
   # On success retrieve user_id, first_name, and last name from 'users' database.
@@ -44,7 +45,7 @@ function validate( $dbc, $email = '', $pwd = '')
       return array( true, $row ) ; 
     }
     # Or on failure set error message.
-    else { $errors[] = 'Email address and password not found.' ; }
+    else { $errors[] = $type[2] ; }
   }
   # On failure retrieve error message/s.
   return array( false, $errors ) ; 

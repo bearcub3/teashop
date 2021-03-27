@@ -84,7 +84,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     <?php if (in_array('first_name', $errors)): ?>
       <p class="col-9 text-warning">First name must have a value without special characters or numbers.</p>
     <?php endif; ?>
-    </div>
+  </div>
   <div class="row justify-content-end mt-3">
     <label for="last_name" class="col-3">Last Name</label>
     <input class="col-9" type="text" name="last_name" id="last_name" size="20" value="<?php if (isset($_POST['last_name'])) echo $_POST['last_name']; ?>">
