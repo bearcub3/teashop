@@ -18,7 +18,7 @@ if (isset($_REQUEST['product_id']))
     $result = mysqli_query($dbc, $query);
 
     
-    echo '<div class="row">';
+    echo '<div class="row mx-2">';
     if ($result)
     {
         while ($row = mysqli_fetch_assoc($result))
@@ -61,15 +61,23 @@ if (isset($_REQUEST['product_id']))
 
             echo "<div class=\"row mt-5 mx-2\"><button type=\"button\" class=\"fw-bold btn btn-primary py-3\">Add to your basket</button></div>";
             echo "<div class=\"row mt-2 mx-2\"><button type=\"button\" class=\"fw-bold btn btn-outline-primary py-3\">&hearts; Add to your wishlist</button></div>";
-            echo "</div></div>";
+            echo "</div>";
 
             // start of a new row
-            echo "<div class=\"row justify-content-center gx-5 mb-5\">$spec</div>";
+            echo "<div class=\"col-12 mb-5 gx-5\">$spec</div>";
 
-            
+            // discussion
+            echo "<div class=\"col-12 mb-5 gx-5\">
+                    <div class=\"d-flex flex-row justify-content-between\">
+                        <h4>Discussion</h4>
+                        <a href=\"post.php\" class=\"btn btn-dark\">Start a discussion</a>
+                    </div>
+                ";
+            include('includes/discuss.php');
+            echo "</div>";
         }
     }
-    echo '</div>';
+    echo '</div></div>';
 
   # Close database connection.
   mysqli_close( $dbc ) ;
