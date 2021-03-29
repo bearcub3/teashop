@@ -1,24 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?&family=Playfair&family=Open+Sans:wght@400,700&display=swap');
 
 * { 
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
 
-header > h1 { border-bottom: 1px dashed black ; font-style: italic ; font-size: x-large; }
+#logo { font-family: 'Playfair Display', serif; font-weight: bold; color: #000; }
+
 footer > p { border-top: 1px dashed black ; font-style: italic ; }
 table { border-spacing:5px; width:530px;}
 th { color:#FFF; background:#000; text-align:left; }
 td { border-bottom:1px solid black; background:#F0F0F0; padding:3px; text-align:left; vertical-align:top;}
 .error { color:#F00; }
 
-.font-opensans {
-    font-family: 'Open Sans', sans-serif;
-}
-
 .thumbnail-img {
-    width: 250px;
-    height: 250px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-content: center;

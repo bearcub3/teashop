@@ -1,5 +1,5 @@
 (function (win, doc){
-    const furniture = {
+    const allMyTeaShop = {
         init : function () {
             this.imageViewer();
         },
@@ -38,6 +38,6 @@
         }
     }
 
-    furniture.init();
+    allMyTeaShop.init();
 })(window, document);
 
