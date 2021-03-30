@@ -69,7 +69,7 @@ if (isset($_REQUEST['product_id']))
             // discussion
             echo "<div class=\"col-12 mb-5 gx-5\">
                     <div class=\"d-flex flex-row justify-content-between\">
-                        <h4>Discussion</h4>
+                        <h4 id=\"discussion\">Discussion</h4>
                         <a href=\"post.php\" class=\"btn btn-dark\">Start a discussion</a>
                     </div>
                 ";
@@ -91,4 +91,6 @@ if (isset($_REQUEST['product_id']))
 # Display footer section.
 include ( 'includes/footer.html' ) ;
 echo '<script src="js/imageView.js"></script>';
+echo '<script src="js/liking.js"></script>';
+echo '<script src="js/noResubmission.js"></script>';
 ?>

@@ -14,5 +14,6 @@ echo '</div>';
 # Display footer section.
 include ( 'includes/footer.html' ) ;
 
-echo '<script src="js/utilities.js"></script>';
+echo '<script src="js/submitForm.js"></script>';
+echo '<script src="js/noResubmission.js"></script>';
 ?>
