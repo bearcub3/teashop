@@ -5,14 +5,12 @@ function load( $page = 'login.php' )
 {
   # Begin URL with protocol, domain, and current directory.
   $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER['REQUEST_URI']) ;
-  
+
   $Url = $_SERVER['REQUEST_URI'];
   $parts = parse_url($url);
   
-  
-  $newUrl = $parts['scheme'] . '://' . $parts['host'] . ':8888' . $parts['path'] . '/' . $page;;
-  
-  # Execute redirect then quit. 
+  $newUrl = $parts['scheme'] . '://' . $parts['host'] . ':8888' . $parts['path'] . '/' . $page;
+
   header( "Location: $newUrl" ) ; 
   exit() ;
 }

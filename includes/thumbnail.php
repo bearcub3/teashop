@@ -1,13 +1,4 @@
 <?php 
-# Access session.
-session_start() ;
-
-# Open database connection.
-require ( 'connect_db.php' ) ;
-
-# Retrieve items from 'shop' database table.
-$q = "SELECT * FROM shop" ;
-$r = mysqli_query( $dbc, $q ) ;
 if ( mysqli_num_rows( $r ) > 0 )
 {
     $total = $r->num_rows;

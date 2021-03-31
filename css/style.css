@@ -36,7 +36,14 @@ a:link {
     outline: inherit;
 }
 
-.hide {
-    position: absolute;
-    left: -1000px;
+@media screen and (max-width: 510px) {
+    .product-height {
+        padding: 0 2rem;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .product-height {
+        padding: 0 2rem;
+    }
 }

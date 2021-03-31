@@ -19,6 +19,7 @@ $r = mysqli_query($dbc, $query);
 
 echo '<div class="row">';
 include ('includes/thumbnail.php');
+echo '</div>';
 
 // Check connection
 if ($dbc->connect_error) {
@@ -26,5 +27,8 @@ if ($dbc->connect_error) {
 }
 
 include ( 'includes/footer.html' ) ;
+
+echo '<script src="js/submitForm.js"></script>';
+echo '<script src="js/noResubmission.js"></script>';
 ?>
 

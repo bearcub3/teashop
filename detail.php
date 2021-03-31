@@ -16,9 +16,9 @@ if (isset($_REQUEST['product_id']))
     $id = $_REQUEST['product_id'];
     $query = "SELECT * FROM shop WHERE item_id=$id";
     $result = mysqli_query($dbc, $query);
-
     
     echo '<div class="row mx-2">';
+
     if ($result)
     {
         while ($row = mysqli_fetch_assoc($result))
@@ -31,6 +31,7 @@ if (isset($_REQUEST['product_id']))
             $spec = $row['item_spec'];
             $hasOption = $row['options_id'];
             $category = $row['item_category'];
+            $item_id = $row['item_id'];
 
             // category
             echo "<div class=\"mt-5 mb-3\">Home > " .$category. " > " .$name. "</div>";
@@ -48,10 +49,7 @@ if (isset($_REQUEST['product_id']))
             // column for item's detail
             echo "<div class=\"col-12 col-sm-6 mb-5 gx-5\">";
             echo "<h2 class=\"fs-1 fw-bold\">$name</h2><hr />";
-            echo "<p class=\"fs-1\">£ $price </p>";
-
-            // user's rate
-            require ( 'rate_item.php' ) ;
+            echo "<p class=\"fs-1\">£ $price</p>";
 
             // total rates
             include ( 'rate_result.php' );
@@ -68,12 +66,20 @@ if (isset($_REQUEST['product_id']))
 
             // discussion
             echo "<div class=\"col-12 mb-5 gx-5\">
-                    <div class=\"d-flex flex-row justify-content-between\">
-                        <h4 id=\"discussion\">Discussion</h4>
-                        <a href=\"post.php\" class=\"btn btn-dark\">Start a discussion</a>
-                    </div>
-                ";
+                    <div class=\"d-flex flex-row justify-content-between mb-3\">
+                        <h4 id=\"discussion\">Discussion</h4>";
+            
+            if ( !isset( $_SESSION[ 'user_id' ] ) ) 
+            {
+                echo "<a href=\"login.php?product_id=$item_id\" class=\"btn btn-dark\">Login to discuss</a>";
+            } else {
+                echo "<a href=\"post.php?item=$item_id\" class=\"btn btn-dark\">Start a discussion</a>";
+            }
+                        
+            echo "</div>";
+
             include('includes/discuss.php');
+            
             echo "</div>";
         }
     }

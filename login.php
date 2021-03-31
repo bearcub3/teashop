@@ -4,7 +4,6 @@
 $page_title = 'Login' ;
 include ( 'includes/header.php' ) ;
 
-
 // for a better usability in case of users failing to login at their first attempt
 if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 {
@@ -12,7 +11,6 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     $email[] = $_POST['email'];
 }
 ?>
-
 
 <!-- Display body section. -->
 <div class="d-flex flex-column my-5">
@@ -47,6 +45,13 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     <?php endif; ?>
     
     <div class="row justify-content-center mx-3 my-3">
+        <?php
+            if (isset($_REQUEST['product_id']))
+            {
+                $product_id = $_REQUEST['product_id'];
+                echo "<input type=\"hidden\" name=\"location\" value=\"detail.php?product_id=$product_id#discussion\" />";
+            }
+        ?>
         <input class="w-50 btn btn-dark" type="submit" value="Log In">
     </div>
     <div class="d-flex justify-content-center mx-3 my-3">
