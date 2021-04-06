@@ -45,6 +45,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     { $errors[] = $fields[3]; }
   }
 
+  // procedural style
   $fn = mysqli_real_escape_string( $dbc, trim( $_POST[ 'first_name' ] ) );
   $ln = mysqli_real_escape_string( $dbc, trim( $_POST[ 'last_name' ] ) );
   $e = mysqli_real_escape_string( $dbc, trim( $_POST[ 'email' ] ) );

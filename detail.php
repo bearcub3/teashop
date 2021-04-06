@@ -23,6 +23,7 @@ if (isset($_REQUEST['product_id']))
     {
         while ($row = mysqli_fetch_assoc($result))
         {
+            $item_id = $row['item_id'];
             $image1 = $row['item_img1'];
             $image2 = $row['item_img2'];
             $name = $row['item_name'];
@@ -34,7 +35,7 @@ if (isset($_REQUEST['product_id']))
             $item_id = $row['item_id'];
 
             // category
-            echo "<div class=\"mt-5 mb-3\">Home > " .$category. " > " .$name. "</div>";
+            echo "<div class=\"mt-5 mb-3\"><a class=\"text-dark\" href=\"home.php\">Home</a> > <a class=\"text-dark\" href=\"category.php?category=$category\">" .$category. "</a> > <b>" .$name. "</b></div>";
 
             // column for images
             echo "<div class=\"col-12 col-sm-6 mb-5 gx-5\">";
@@ -57,8 +58,8 @@ if (isset($_REQUEST['product_id']))
             // product options
             include ( 'options.php' );
 
-            echo "<div class=\"row mt-5 mx-2\"><button type=\"button\" class=\"fw-bold btn btn-primary py-3\">Add to your basket</button></div>";
-            echo "<div class=\"row mt-2 mx-2\"><button type=\"button\" class=\"fw-bold btn btn-outline-primary py-3\">&hearts; Add to your wishlist</button></div>";
+            echo "<div class=\"row mt-5 mx-2\"><a class=\"fw-bold btn btn-dark btn-sm py-3\" href=\"added.php?id=$item_id\">Add to your basket</a></div>";
+            echo "<div class=\"row mt-2 mx-2\"><a class=\"fw-bold btn btn-outline-dark btn-sm py-3\">&hearts; Add to your wishlist</a></div>";
             echo "</div>";
 
             // start of a new row
@@ -66,18 +67,35 @@ if (isset($_REQUEST['product_id']))
 
             // discussion
             echo "<div class=\"col-12 mb-5 gx-5\">
-                    <div class=\"d-flex flex-row justify-content-between mb-3\">
-                        <h4 id=\"discussion\">Discussion</h4>";
+                    <div class=\"d-flex flex-row justify-content-between\">
+                        <h4 id=\"discussion\">Customer Review</h4>
+                    </div>";
             
+
+                        
+            echo "<div class=\"d-flex flex-row justify-content-between mb-3\">
+                    <div>Remember, One review per an ID is only allowed.</div>";
+
             if ( !isset( $_SESSION[ 'user_id' ] ) ) 
             {
-                echo "<a href=\"login.php?product_id=$item_id\" class=\"btn btn-dark\">Login to discuss</a>";
+                echo "<a href=\"login.php?product_id=$item_id\" class=\"btn btn-dark\">Login to review</a>";
             } else {
-                echo "<a href=\"post.php?item=$item_id\" class=\"btn btn-dark\">Start a discussion</a>";
+                $user_id = $_SESSION[ 'user_id' ];
+                $query = "SELECT COUNT(*) AS written
+                                FROM forum
+                                WHERE u_id=$user_id AND item_id=$item_id";
+                $result = mysqli_query($dbc, $query);
+                $hasWritten = $result -> fetch_assoc();
+                
+                if($hasWritten['written'] >= 1)
+                {
+                    
+                } else {
+                    echo "<a href=\"post.php?item=$item_id\" class=\"btn btn-dark\">Write a review</a>";
+                }
             }
-                        
-            echo "</div>";
 
+            echo "</div>";
             include('includes/discuss.php');
             
             echo "</div>";

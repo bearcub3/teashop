@@ -12,7 +12,7 @@ require ( 'connect_db.php' ) ;
 $category = $_REQUEST['category'];
 
 // category
-echo "<div class=\"mt-5 mb-3\">Home > <b>" .$category. " </b></div>";
+echo "<div class=\"mt-5 mb-3\"><a class=\"text-dark\" href=\"home.php\">Home</a> > <a class=\"text-dark\" href=\"category.php?category=$category\"><b>" .$category. " </b></a></div>";
 
 $query = "SELECT * FROM shop WHERE item_category='$category'";
 $r = mysqli_query($dbc, $query);
