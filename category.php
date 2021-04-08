@@ -2,7 +2,6 @@
 
 # Access session.
 session_start() ;
-
 # Set display header section.
 include ( 'includes/header.php' ) ; 
 

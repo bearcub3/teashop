@@ -14,14 +14,23 @@
         <h1 class="align-self-center ms-5">
             <a class="fs-3" href="home.php" id="logo">All-My-Tea Cups</a>
         </h1>
-        <a class="ms-auto align-self-center px-3" href="cart.php">View Cart</a><span class="align-self-center">|</span>
+        <a class="ms-auto align-self-center px-3 text-dark" href="cart.php">View Cart</a><span class="align-self-center">|</span>
         <?php
         # Redirect if not logged in.
+        if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' && $_POST[ 'action' ] === 'logout' )
+        {
+            $_SESSION = array() ;
+            session_destroy() ;
+        }
+
         if ( !isset( $_SESSION[ 'user_id' ] ) ) 
         {
-            echo '<a class="align-self-center px-3" href="login.php">Log In</a>';
+            echo '<a class="align-self-center text-dark px-3" href="login.php">Log In</a>';
         } else {
-            echo '<a class="align-self-center px-3" href="goodbye.php">Log out</a>';
+            echo '<form action="home.php" method="post" class="align-self-center text-dark px-3">
+                    <input type="hidden" value="logout" name="action">
+                    <input type="submit" value="Log Out" class="logout-btn" />
+                </form>';
         }
         ?>
     </div>

@@ -5,7 +5,7 @@ if ($hasOption != 0)
     $query = "SELECT * FROM shop WHERE options_id=$hasOption";
     $options = mysqli_query($dbc, $query);
 
-    echo "<div class=\"d-flex flex-row justify-content-start align-items-center mt-2\">
+    echo "<div class=\"col-12 d-flex flex-row justify-content-start align-items-center mb-3\">
             <div><p class=\"fw-bold\">Options :</p></div>
             <div class=\"align-self-item\">";
 

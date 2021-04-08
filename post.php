@@ -20,7 +20,6 @@ $target_dir = "uploads/";
 $uploadSuceeded = false;
 $item_id;
 
-
 $errors = array();
 $fields = ['subject', 'message', 'rates'];
 
@@ -232,11 +231,11 @@ if (isset($_REQUEST['item']))
         </div>
         <div class="d-flex justify-content-center my-3">
             <?php 
-                if(count($picture_ids) > 0)
+                if(count($picture_ids) !== 0)
                 {
                     foreach($picture_ids as $key=>$value) echo "<input type=\"hidden\" name=\"picture-$key\" value=\"$value\" />";
-                    if(count($picture_ids) < 2)
-                    {
+                    
+                    if(count($picture_ids) < 2){
                         echo "<input type=\"hidden\" name=\"picture-1\" value=\"0\" />";
                         echo "<input type=\"hidden\" name=\"picture-2\" value=\"0\" />";
                     } elseif(count($picture_ids) < 3) {

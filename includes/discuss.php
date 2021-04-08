@@ -11,7 +11,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     $post_id = $_REQUEST[ 'post_id' ];
 
     // only a logged in user can do/undo the like discussion.
-    if ( $user_id ) 
+    if ( $user_id && $_POST[ 'action' ] === 'like' ) 
     {
         $q = "SELECT liked_by, p_id 
                 FROM discussion_likes 
@@ -30,15 +30,33 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
                         VALUES ($user_id, $post_id)";
             $row = @mysqli_query ( $dbc, $like ) ;
         }
-    } else {
+    } else if ( $_POST[ 'action' ] === 'like' && !$user_id ) {
         echo '<script>alert(\'Please login first\')</script>';
+    }
+
+    if ( $_POST[ 'action' ] == 'delete')
+    {
+        $product_id = $_POST[ 'item_id' ];
+
+        $deletePost = "DELETE FROM forum WHERE post_id=$post_id";
+        $r = mysqli_query($dbc, $deletePost);
+
+        $deleteImages = "DELETE FROM forum_images WHERE u_id=$user_id AND product_id=$product_id";
+        $r = mysqli_query($dbc, $deleteImages);
+
+        $deleteLikes = "DELETE FROM discussion_likes WHERE p_id=$post_id";
+        $r = mysqli_query($dbc, $deleteLikes);
+
+        $deleteRate = "DELETE FROM product_rates WHERE item_id=$product_id AND rated_by=$user_id";
+        $r = mysqli_query($dbc, $deleteRate);
+        
     }
 }
 
 if (isset($_REQUEST['product_id']))
 {
     $id = $_REQUEST['product_id'];
-    $query = "SELECT f.post_id, u.first_name, f.subject, f.message, f.post_date, f.img1_id, f.img2_id, f.img3_id
+    $query = "SELECT f.post_id, u.first_name, f.subject, f.message, f.post_date, f.img1_id, f.img2_id, f.img3_id, f.u_id
                 FROM forum f
                 JOIN users u
                 ON u.user_id = f.u_id
@@ -58,6 +76,7 @@ if (isset($_REQUEST['product_id']))
             $img1 = $row['img1_id'];
             $img2 = $row['img2_id'];
             $img3 = $row['img3_id'];
+            $u_id = $row['u_id'];
 
             // if there is any likes for a discussion
             $hasLikes = "SELECT COUNT(d.like_id) as total_likes
@@ -86,34 +105,62 @@ if (isset($_REQUEST['product_id']))
                     <div class=\"col-6 col-sm-3\"><p class=\"fw-bold mx-3 my-3\">$name</p></div>
                     <div class=\"col-6 col-sm-9\"><p class=\"fw-light mx-3 my-3 text-end\">$date</p></div>
                 </div>
-                <div class=\"d-flex flex-row justify-content-start align-items-center bg-light\">
-                    <div class=\"col-9 ms-3 my-3\"><p>$subject</p></div>
-                    <div class=\"col-2 my-3 d-flex flex-row justify-content-end\">
+                <div class=\"d-flex flex-row justify-content-start align-items-center bg-light\">";
+
+
+
+            if($user_id)
+            {   
+                echo "<div class=\"col-sm-10 col-8 ps-3 my-3\"><p>$subject</p></div>
+                    <div class=\"col-sm-1 col-2 my-3 d-flex flex-row justify-content-end\">
                         <form action=\"$PHP_SELF#discussion\" method=\"POST\">
                             <input type=\"hidden\" value=\"$post_id\" name=\"post_id\">
+                            <input type=\"hidden\" value=\"like\" name=\"action\">
                             <button type=\"submit\" class=\"liking\">";
+                
+                $row = $hasUserLikedResult -> fetch_assoc();
 
-                            if($user_id)
-                            {   
-                                $row = $hasUserLikedResult -> fetch_assoc();
+                if ($row['liked_by'] == $user_id)
+                {
+                    echo "<i class=\"bi bi-heart-fill text-danger\"></i>";
+                } else {
+                    echo "<i class=\"bi bi-heart text-danger\"></i>";
+                }
 
-                                if ($row['liked_by'] != $user_id)
-                                {
-                                    echo "<i class=\"bi bi-heart text-danger\"></i>";
-                                } else {
-                                    echo "<i class=\"bi bi-heart-fill text-danger\"></i>";
-                                }
-                                
-                            } else {
-                                echo "<i class=\"bi bi-heart text-danger\"></i>";
-                            }
-
-            echo "          </button>
+                echo "      </button>
                         </form>
                     <div class=\"ms-2\">
-                        <p class=\"fw-light\">$total_likes</p>
+                        <p class=\"fw-light mb-0\">$total_likes</p>
                     </div>
-                </div>
+                </div>";
+
+                if ($u_id == $user_id)
+                {
+                    echo "<div class=\"col-sm-1 col-2 my-3 d-flex flex-row align-items-center justify-content-center\">
+                            <form method=\"post\">
+                                <input type=\"hidden\" value=\"$post_id\" name=\"post_id\">
+                                <input type=\"hidden\" value=\"$id\" name=\"item_id\">
+                                <input type=\"hidden\" value=\"delete\" name=\"action\">
+                                <button type=\"submit\" class=\"deleting\"><i class=\"bi bi-trash\"></i></button>
+                            </form>
+                        </div>";
+                }
+            } else {
+                echo "<div class=\"col-10 ms-3 my-3\"><p>$subject</p></div>
+                    <div class=\"col-2 my-3 d-flex flex-row justify-content-start\">
+                        <form action=\"$PHP_SELF#discussion\" method=\"POST\">
+                            <input type=\"hidden\" value=\"$post_id\" name=\"post_id\">
+                            <input type=\"hidden\" value=\"like\" name=\"action\">
+                            <button type=\"submit\" class=\"liking\">
+                                <i class=\"bi bi-heart text-danger\"></i>
+                            </button>
+                        </form>
+                        <div class=\"ms-2\">
+                            <p class=\"fw-light mb-0\">$total_likes</p>
+                        </div></div>";
+            }
+
+            echo "
             </div>
             <div class=\"d-flex flex-row justify-content-center align-items-center bg-light\">";
             

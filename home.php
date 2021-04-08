@@ -12,7 +12,6 @@ $r = mysqli_query( $dbc, $query ) ;
 include ( 'includes/header.php' ) ; 
 include ( 'includes/event.php' ) ; 
 
-
 # Display body section.
 echo '<div class="row">';
 

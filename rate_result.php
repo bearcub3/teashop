@@ -23,8 +23,8 @@ if (isset($_REQUEST['product_id']))
             $pattern = '/\./';
             $splitRate = str_split($toString, 1);
             
-            echo "<div class=\"d-flex flex-row justify-content-start align-items-center\">
-                    <div>Consumers Rates : </div>
+            echo "<div class=\"col-12 d-flex mb-3 gx-5 bg-light py-2\">
+                    <div class=\"mx-2\">Consumers Rates : </div>
                     <div>&nbsp;";
             if ($rate > 0)
             {
