@@ -47,7 +47,7 @@ if ( mysqli_num_rows( $r ) > 0 )
                 echo "</a>";
                 echo "</div>";
             echo "<a href=\"detail.php?product_id=$id\">";
-                echo "<p class=\"font text-dark fs-5 fw-bold text-truncate border-bottom py-2\">$name</p></a>
+                echo "<div class=\"d-flex flex-row align-items-center font text-dark fs-6 fw-bold border-bottom mb-3\" style=\"height: 80px;\">$name</div></a>
                     <p class=\"text-truncate text-secondary\">$desc</p>
                     <p class=\"fs-4\">£ $price</p>
                     <form method=\"post\" style=\"width: 100%;\">
@@ -65,17 +65,3 @@ if ( mysqli_num_rows( $r ) > 0 )
 
 mysqli_close( $dbc ) ; 
 ?>
-<script type="text/javascript">
-    const userSort = '<?php echo $_SESSION[ 'sorting' ]; ?>';
-    const options = document.querySelectorAll('option');
-
-    if(userSort.length) {
-        options.forEach((option) => {
-            if(option.value === userSort) {
-                option.setAttribute('selected', '');
-            } else {
-                option.removeAttribute('selected');
-            }
-        })
-    }
-</script>

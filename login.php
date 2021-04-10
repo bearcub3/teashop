@@ -35,13 +35,14 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
             <?php endif; ?>
         </div>
     </div>
+
     <?php if (!empty( $errors ) && in_array('no account', $errors)): ?>
-    <div class="row justify-content-start mx-3 my-2">
-        <p class="text-warning text-center">
-        <i class="bi bi-exclamation-circle"></i>
-            Email address and/or password not found. Please, Try again.
-        </p>
-    </div>
+        <div class="row justify-content-start mx-3 my-2">
+            <p class="text-warning text-center">
+            <i class="bi bi-exclamation-circle"></i>
+                Email address and/or password not found. Please, Try again.
+            </p>
+        </div>
     <?php endif; ?>
     
     <div class="row justify-content-center mx-3 my-3">
@@ -50,6 +51,8 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
             {
                 $product_id = $_REQUEST['product_id'];
                 echo "<input type=\"hidden\" name=\"location\" value=\"detail.php?product_id=$product_id#discussion\" />";
+            } elseif (isset($_REQUEST['where'])) {
+                echo "<input type=\"hidden\" name=\"location\" value=\"cart.php\" />";
             }
         ?>
         <input class="w-50 btn btn-dark" type="submit" value="Log In">

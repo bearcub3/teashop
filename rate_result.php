@@ -19,7 +19,6 @@ if (isset($_REQUEST['product_id']))
         {
             $rate = $row['AverageRate'] + 0;
             $toString = strval($rate);
-
             $pattern = '/\./';
             $splitRate = str_split($toString, 1);
             

@@ -1,7 +1,6 @@
 <?php # DISPLAY COMPLETE REGISTRATION PAGE.
 
 # Set page title and display header section.
-$page_title = 'Register' ;
 include ( 'includes/header.php' ) ;
 
 # Check form submitted.
@@ -79,7 +78,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 <!-- Display body section with sticky form. -->
 <h1>Register</h1>
 <form action="register.php" method="post">
-  <div class="row justify-content-end mt-3">
+  <div class="row justify-content-end">
     <label for="first_name" class="col-3">First Name</label>
     <input class="col-9" type="text" name="first_name" id="first_name" size="20" value="<?php if (isset($_POST['first_name'])) echo $_POST['first_name']; ?>">
     <?php if (in_array('first_name', $errors)): ?>
@@ -111,9 +110,9 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     <label for="pass2" class="col-3">Confirm Password: </label>
     <input class="col-9" type="password" name="pass2" id="pass2" size="20" value="<?php if (isset($_POST['pass2'])) echo $_POST['pass2']; ?>">
   </div>
-  <div class="d-flex justify-content-center mt-3">
-    <input class="w-50 btn btn-primary" type="submit" value="Register">
-  </div>
+  <div class="d-flex justify-content-center my-3">
+    <input class="w-50 btn btn-dark" type="submit" value="Register">
+  </div>  
 </form>
 
 <?php 

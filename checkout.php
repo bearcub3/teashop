@@ -6,8 +6,6 @@ session_start() ;
 # Redirect if not logged in.
 if ( !isset( $_SESSION[ 'user_id' ] ) ) { require ( 'login_tools.php' ) ; load() ; }
 
-# Set page title and display header section.
-$page_title = 'Checkout' ;
 include ( 'includes/header.php' ) ;
 
 # Check for passed total and cart.
@@ -27,7 +25,7 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
   $q = "SELECT * FROM shop WHERE item_id IN (";
   foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
   $q = substr( $q, 0, -1 ) . ') ORDER BY item_id ASC';
-  $result = mysqli_query ($dbc, $q);
+  $r = mysqli_query ($dbc, $q);
 
 
   # Store order contents in 'order_contents' database table.

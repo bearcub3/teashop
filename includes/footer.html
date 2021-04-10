@@ -54,5 +54,19 @@
         </div>
 </footer>
 <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    const userSort = '<?php echo $_SESSION[ 'sorting' ]; ?>';
+    const options = document.querySelectorAll('option');
+
+    if(userSort.length) {
+        options.forEach((option) => {
+            if(option.value === userSort) {
+                option.setAttribute('selected', '');
+            } else {
+                option.removeAttribute('selected');
+            }
+        })
+    }
+</script>
 </body>
 </html>

@@ -42,16 +42,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav d-flex justify-content-start">
                     <li class="nav-item mx-4">
-                        <a class="nav-link" href="home.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
                     </li>
                     <li class="nav-item mx-4">
-                        <a class="nav-link" href="category.php?category=TeaCup">Tea Cups</a>
+                        <a class="nav-link" href="category.php?category=TeaCup">TeaCup</a>
                     </li>
                     <li class="nav-item mx-4">
-                        <a class="nav-link" href="category.php?category=CoffeeCup">Coffee Cups</a>
+                        <a class="nav-link" href="category.php?category=CoffeeCup">CoffeeCup</a>
                     </li>
                     <li class="nav-item mx-4">
-                        <a class="nav-link" href="category.php?category=Mug">Mugs</a>
+                        <a class="nav-link" href="category.php?category=Mug">Mug</a>
                     </li>
                 </ul>
             </div>

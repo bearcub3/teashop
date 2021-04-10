@@ -10,9 +10,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
   require ( 'login_tools.php' ) ;
 
   $redirect = NULL;
-  if($_POST['location'] != '') {
-    $redirect = $_POST['location'];
-  }
+  if($_POST['location'] != '') $redirect = $_POST['location'];
 
   # Check login.
   list ( $check, $data ) = validate ( $dbc, $_POST[ 'email' ], $_POST[ 'password' ] ) ;

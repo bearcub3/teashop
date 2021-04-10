@@ -5,6 +5,103 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background-color: #222;
+    color: white;
+}
+
+::selection {
+    background-color:rgb(68, 0, 255);
+}
+
+a:link {
+    text-decoration: none;
+    display: inline-block;
+}
+
+footer a:link,
+footer a:visited {
+    color:rgb(32, 32, 32);
+    position: relative;
+}
+
+footer a:hover,
+footer a:active {
+    text-decoration: underline;
+}
+
+.nav-item a:hover,
+.nav-item a:active {
+    text-decoration: none;
+}
+
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 5px;
+    border-bottom: 2px solid rgb(32, 32, 32);
+    opacity: 0;
+    width: 0;
+    transition: opacity 1s, width .6s;  
+}
+
+.nav-item a:hover::after,
+.nav-item a:active::after {
+    width: 100%;
+    opacity: 1;
+}
+
+.nav-item .active::before {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 5px;
+    border-bottom: 2px solid rgb(32, 32, 32);
+    width: 100%;
+}
+
+footer a:link,
+footer a:visited {
+    color: white;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+    border-bottom: 1px solid white;
+    opacity: 0;
+    width: 0;
+    transition: opacity 1s, width .6s;  
+}
+
+footer a:not(.social-icon):hover::after,
+footer a:not(.social-icon):active::after {
+    width: 100%;
+    opacity: 1;
+}
+
+footer a:hover,
+footer a:active {
+    text-decoration: none;
+    color: white;
+}
+
+.social-icon:link svg,
+.social-icon:visited svg {
+    transition: fill .7s;
+}
+
+.social-icon:hover svg,
+.social-icon:active svg {
+    fill: rgb(68, 0, 255);
+}
+
 #logo { font-family: 'Playfair Display', serif; font-weight: bold; color: #000; }
 .font { font-family: 'Playfair Display', serif !important; }
 
@@ -31,11 +128,6 @@ footer > p { border-top: 1px dashed black ; font-style: italic ; }
     align-content: center;
 }
 
-
-a:link {
-    text-decoration: none;
-    display: inline-block;
-}
 
 .liking {
     background: none;
@@ -64,3 +156,4 @@ a:link {
         padding: 0 2rem;
     }
 }
+

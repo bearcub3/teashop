@@ -7,6 +7,7 @@ session_start() ;
 $page_title = 'Cart' ;
 include ( 'includes/header.php' ) ;
 
+$user_id = $_SESSION[ 'user_id' ];
 
 # Check if form has been submitted for update.
 if ( $_SERVER['REQUEST_METHOD'] == 'POST' )
@@ -117,12 +118,21 @@ if (!empty($_SESSION['cart']))
 
   echo "<div class=\"row align-items-center mt-3 mb-5\">
           <div class=\"fs-5 col-4\">Total : £" .number_format($total,2). "</div>
-          <div class=\"col-4 col-sm-2 ms-auto\">
-            <a href=\"checkout.php?total=$total\" class=\"btn btn-outline-dark\"><i class=\"bi bi-bag-check fs-5 me-2\"></i>checkout</a>
-          </div>
-        </div>
-        ";  
-  echo "</form></div>";
+          <div class=\"col-4 col-sm-2 ms-auto\">";
+
+  if($user_id){
+    echo "<a href=\"checkout.php?total=$total\" class=\"btn btn-outline-dark\">
+            <i class=\"bi bi-bag-check fs-5 me-2\"></i>checkout
+          </a>";
+  } else {
+    echo "<a href=\"login.php?where=cart.php\" class=\"btn btn-outline-dark\"><i class=\"bi bi-bag-check fs-5 me-2\"></i> Login to buy</a>";
+  }
+  
+  echo "  </div>
+        </div>";
+
+  echo "  </form>
+        </div>";
 } else { 
   echo "<div class=\"py-3 my-3\">
           <p class=\"text-center\"><i class=\"bi bi-bag fs-1\"></i></p>

@@ -17,10 +17,13 @@ if ($hasOption != 0)
             $id = $row['item_id'];
             $name = $row['item_name'];
 
-            echo "<a href=\"detail.php?product_id=$id\" class=\"mx-1 border border-2\"><img alt=\"$name\" src=\"$image1\" width=\"70px\" height=\"70px\" /></a>";
+            echo "<a href=\"detail.php?product_id=$id\" class=\"mx-1 border border-2\">
+                    <img alt=\"$name\" src=\"$image1\" width=\"70px\" height=\"70px\" />
+                </a>";
         }
     }
-    echo '</div></div>';
+    echo '</div>
+        </div>';
 }
 
 ?>
