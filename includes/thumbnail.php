@@ -48,8 +48,7 @@ if ( mysqli_num_rows( $r ) > 0 )
                 echo "</div>";
             echo "<a href=\"detail.php?product_id=$id\">";
                 echo "<div class=\"d-flex flex-row align-items-center font text-dark fs-6 fw-bold border-bottom mb-3\" style=\"height: 80px;\">$name</div></a>
-                    <p class=\"text-truncate text-secondary\">$desc</p>
-                    <p class=\"fs-4\">£ $price</p>
+                    <p class=\"fs-4 fw-bold\">£ $price</p>
                     <form method=\"post\" style=\"width: 100%;\">
                         <input type=\"hidden\" name=\"action\" value=\"basket\" />
                         <input type=\"hidden\" name=\"id\" value=\"$id\" />

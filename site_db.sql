@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 10, 2021 at 10:11 PM
+-- Generation Time: Apr 12, 2021 at 04:38 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -48,7 +48,16 @@ INSERT INTO `discussion_likes` (`like_id`, `liked_by`, `p_id`) VALUES
 (52, 23, 67),
 (53, 20, 67),
 (54, 24, 67),
-(55, 25, 67);
+(55, 25, 67),
+(56, 20, 54),
+(57, 20, 68),
+(58, 27, 68),
+(59, 27, 54),
+(60, 27, 67),
+(62, 27, 62),
+(63, 27, 65),
+(64, 28, 67),
+(66, 28, 62);
 
 -- --------------------------------------------------------
 
@@ -81,7 +90,9 @@ INSERT INTO `forum` (`post_id`, `u_id`, `subject`, `message`, `img1_id`, `img2_i
 (63, 23, 'classic', 'only for special occasion ', 0, 0, 0, '2021-04-09 21:42:54', 12),
 (64, 24, 'Tea cup review ', ':-) ', 0, 0, 0, '2021-04-09 21:57:48', 12),
 (65, 25, 'this is test.', 'perfection!', 0, 0, 0, '2021-04-09 21:59:24', 12),
-(67, 26, 'My favorite!', 'The Owl telling me \"come and grab the cup and sip tea with me!\" ', 11, 12, 0, '2021-04-10 21:29:49', 10);
+(67, 26, 'My favorite!', 'The Owl telling me \"come and grab the cup and sip tea with me!\" ', 11, 12, 0, '2021-04-10 21:29:49', 10),
+(68, 20, 'test', 'this is a message', 13, 0, 0, '2021-04-11 00:19:44', 6),
+(71, 28, 'classic', 'my favorite!', 16, 0, 0, '2021-04-11 00:35:25', 12);
 
 -- --------------------------------------------------------
 
@@ -104,7 +115,9 @@ INSERT INTO `forum_images` (`fi_id`, `image_src`, `u_id`, `product_id`) VALUES
 (8, 'uploads/teacora-rooibos-cOWE5cctcZI-unsplash.jpg', 20, 15),
 (9, 'uploads/loverna-journey-3Nkvga0rH6I-unsplash.jpg', 20, 15),
 (11, 'uploads/sixteen-miles-out-SvbDNnbipj0-unsplash.jpg', 26, 10),
-(12, 'uploads/brigitte-tohm-EAay7Aj4jbc-unsplash.jpg', 26, 10);
+(12, 'uploads/brigitte-tohm-EAay7Aj4jbc-unsplash.jpg', 26, 10),
+(13, 'uploads/sixteen-miles-out-SvbDNnbipj0-unsplash.jpg', 20, 6),
+(16, 'uploads/brigitte-tohm-EAay7Aj4jbc-unsplash.jpg', 28, 12);
 
 -- --------------------------------------------------------
 
@@ -124,6 +137,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `total`, `order_date`) VALUES
+(13, 20, '160.00', '2021-04-11 00:32:38'),
+(12, 20, '95.00', '2021-04-11 00:20:08'),
 (11, 20, '85.00', '2021-04-08 23:27:21'),
 (10, 20, '95.00', '2021-04-08 22:59:22');
 
@@ -147,7 +162,10 @@ CREATE TABLE `order_contents` (
 
 INSERT INTO `order_contents` (`content_id`, `order_id`, `item_id`, `quantity`, `price`) VALUES
 (2, 10, 12, 1, '95.00'),
-(3, 11, 9, 1, '85.00');
+(3, 11, 9, 1, '85.00'),
+(4, 12, 12, 1, '95.00'),
+(5, 13, 10, 1, '65.00'),
+(6, 13, 13, 1, '95.00');
 
 -- --------------------------------------------------------
 
@@ -175,7 +193,9 @@ INSERT INTO `product_rates` (`rate_id`, `item_id`, `rate`, `rated_by`) VALUES
 (20, 12, 3, 23),
 (21, 12, 4, 24),
 (22, 12, 5, 25),
-(24, 10, 5, 26);
+(24, 10, 5, 26),
+(25, 6, 5, 20),
+(28, 12, 5, 28);
 
 -- --------------------------------------------------------
 
@@ -187,7 +207,6 @@ CREATE TABLE `shop` (
   `item_id` int(10) UNSIGNED NOT NULL,
   `item_category` varchar(20) NOT NULL,
   `item_name` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `item_desc` varchar(400) CHARACTER SET utf8 NOT NULL,
   `item_img1` varchar(100) CHARACTER SET utf8 NOT NULL,
   `item_img2` varchar(100) CHARACTER SET utf8 NOT NULL,
   `item_price` decimal(4,2) NOT NULL,
@@ -199,18 +218,23 @@ CREATE TABLE `shop` (
 -- Dumping data for table `shop`
 --
 
-INSERT INTO `shop` (`item_id`, `item_category`, `item_name`, `item_desc`, `item_img1`, `item_img2`, `item_price`, `item_spec`, `options_id`) VALUES
-(10, 'CoffeeCup', 'Taika espresso cup', 'Designer Klaus Haapaniemi’s lively art and Heikki Orvola’s streamlined design combine to create Taika (‘magic’ in Finnish).', 'assets/images/iittala-nightowl-1.jpeg', '', '65.00', '<dl class=\"d-flex flex-column justify-content-between\">\r\n<dt class=\"\">volume</dt>\r\n<dd>100ml</dd>\r\n<dt>feature</dt>\r\n<dd>An enchanted collection that brings folklore and fairy tales alive through functional, simple design. A cast of colourful characters inspire imagination and storytelling in the everyday with versatile, durable porcelain tableware that fits any table setting.</dd>\r\n</dl>', 0),
-(6, 'TeaCup', 'Wonderlust Rococo Flowers Teacup and Saucer', 'beautifully feminine florals create an elegant look to the Wanderlust Rococo Bowl Teacup and Saucer. Crafted from fine bone china. this duo features a subtle yet stylish geometric backdrop to accentuate the rococo inspired chinoiserie detail. Presented in a wedgwood blue gift box.', 'assets/images/wedgwood-rococo-1.jpeg', 'assets/images/wedgwood-rococo-2.jpeg', '55.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>310g</dd>\r\n<dt>volume</dt>\r\n<dd>150ml</dd>\r\n<dt>features</dt>\r\n<dd>Mixed colour with stunning Gold banding for that extra special touch</dd>\r\n<dd>Featuring a beautiful Ornamental, Expressive pattern</dd>\r\n</dl>', 2),
-(7, 'TeaCup', 'Wonderlust Midnight Crane Teacup and Saucer', 'The Wonderlust Midnight Crane Teacup & Saucer is crafted from fine bone china and features Chinoiserie styled bird and florals contrasting against a rich scroll backdrop. Presented in a Wedgwood blue gift box and ideal with your favourite tea blends.', 'assets/images/wedgwood-midnight-1.jpeg', 'assets/images/wedgwood-midnight-2.jpeg', '50.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>300g</dd>\r\n<dt>volume</dt>\r\n<dd>150ml</dd>\r\n<dt>features</dt>\r\n<dd>Blue is the main colour of this item with stunning Gold banding for that extra special touch </dd>\r\n<dd>Featuring a beautiful Ornamental, Expressive pattern</dd>\r\n</dl>', 2),
-(8, 'Mug', 'Annual Easter Edition mug 2021', 'The Annual Easter Edition makes the hearts of collectors and decoration lovers beat faster – these limited edition favourites have a gold stamp on the base, are only available in the year of issue and come in a beautiful gift box. The ideal Easter present for your loved ones or for yourself. ', 'assets/images/vb-eastermug-1.jpeg', 'assets/images/vb-eastermug-2.jpeg', '35.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>approx. 316g</dd>\r\n<dt>volume</dt>\r\n<dd>approx. 380ml</dd>\r\n</dl>', 0),
-(9, 'CoffeeCup', 'Anmut cappuccino cup\r\n', 'True classic: breakfast cups from Villeroy & Boch\r\n', 'assets/images/vb-anmut-cappuccino-1.jpeg', '', '85.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>approx. 190g</dd>\r\n<dt>volume</dt>\r\n<dd>approx. 400ml</dd>\r\n<dt>feature</dt>\r\n<dd>Timeless gracefulness and playful charm – the Villeroy & Boch Anmut collection offers all that and more. Inspired by designs from the fifties. Opt for graceful and attractive lines for breakfast or afternoon coffee. Impress your guests with this high-quality item.</dd>\r\n</dl>', 0),
-(11, 'Mug', 'Teema mug grey', 'Designed by one of Iittala’s most pioneering design heroes, Kaj Franck', 'assets/images/iittala-teema-1.jpeg', 'assets/images/iittala-teema-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>grey</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection. Collect a set.\r\n</dd>\r\n</dl>', 1),
-(12, 'TeaCup', 'Herend Fish Scale Teacup', 'Produced in the Hungary exclusively for Fortnum & Mason', 'assets/images/herendfishscale-1.jpeg', '', '95.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>5cm(H) x 11cm(W) x 9cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>200ml</dd>\r\n<dt>feature</dt>\r\n<dd>this elegant teacup is crafted from fine white porcelain and features Herend’s signature Fish Scale pattern.</dd>\r\n<dd>Individually hand-painted in Fortnum’s Eau de Nil and finished with 24 carat accents, it makes an elegant addition to your Afternoon Tea experience, or as a gift for a tea lover.\r\n</dd>\r\n</dl>', 0),
-(13, 'Tea Cup', 'Rory Dobner Teacup & Saucer', 'Alice In Wonderland Cheshire Cat', 'assets/images/cheshirecat-1.jpeg', 'assets/images/cheshirecat-2.jpeg', '95.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>5.7cm(H) x 8.4cm(W) x 6cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>190ml</dd>\r\n<dt>feature</dt>\r\n<dd>Made in England exclusively for Fortnum\'s, this Alice In Wonderland Cheshire Cat Teacup & Saucer is crafted from delicate fine bone china, and finished with a hand-painted illustration and 22-carat gold detailing. Simple, yet intricately detailed, it is perfect for teatime sipping.\r\n</dd>\r\n</dl>', 0),
-(14, 'Mug', 'Teema mug yellow', 'Designed by one of Iittala’s most pioneering design heroes, Kaj Franck', 'assets/images/teema-yellow-1.jpeg', 'assets/images/teema-yellow-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>yellow</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection.\r\n</dd>\r\n</dl>', 1),
-(15, 'Mug', 'Teema mug pink', 'Designed by one of Iittala’s most pioneering design heroes, Kaj Franck', 'assets/images/teema-pink-1.jpeg', 'assets/images/teema-pink-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>pink</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection.\r\n</dd>\r\n</dl>', 1),
-(16, 'TeaCup', 'Whittard English Breakfast Tea Cup', 'A flutter of birds soar across our fine bone china English Breakfast Cup and Saucer. A vintage-inspired set designed with the quintessential afternoon tea in mind.', 'assets/images/whittard-chelsea-garden-1.jpeg', 'assets/images/whittard-chelsea-garden-2.jpeg', '16.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>6cm(H) x 10.5cm(W) x 4.5cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>100ml</dd>\r\n<dt>feature</dt>\r\n<dd>We’ve brought quite the teacup collection to our beautiful Tea Discoveries range with dainty fine bone china cups and saucers to complement the delightful Tea Discoveries blends. Inspired by vintage patterns with a nod to afternoon tea’s celebrated heritage, this is a pairing to be treasured.\r\n</dd>\r\n</dl>', 0);
+INSERT INTO `shop` (`item_id`, `item_category`, `item_name`, `item_img1`, `item_img2`, `item_price`, `item_spec`, `options_id`) VALUES
+(10, 'CoffeeCup', 'Taika espresso cup', 'assets/images/iittala-nightowl-1.jpeg', '', '65.00', '<dl class=\"d-flex flex-column justify-content-between\">\r\n<dt class=\"\">volume</dt>\r\n<dd>100ml</dd>\r\n<dt>feature</dt>\r\n<dd>An enchanted collection that brings folklore and fairy tales alive through functional, simple design. A cast of colourful characters inspire imagination and storytelling in the everyday with versatile, durable porcelain tableware that fits any table setting.</dd>\r\n</dl>', 0),
+(6, 'TeaCup', 'Wonderlust Rococo Flowers Teacup and Saucer', 'assets/images/wedgwood-rococo-1.jpeg', 'assets/images/wedgwood-rococo-2.jpeg', '55.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>310g</dd>\r\n<dt>volume</dt>\r\n<dd>150ml</dd>\r\n<dt>features</dt>\r\n<dd>Mixed colour with stunning Gold banding for that extra special touch</dd>\r\n<dd>Featuring a beautiful Ornamental, Expressive pattern</dd>\r\n</dl>', 2),
+(7, 'TeaCup', 'Wonderlust Midnight Crane Teacup and Saucer', 'assets/images/wedgwood-midnight-1.jpeg', 'assets/images/wedgwood-midnight-2.jpeg', '50.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>300g</dd>\r\n<dt>volume</dt>\r\n<dd>150ml</dd>\r\n<dt>features</dt>\r\n<dd>Blue is the main colour of this item with stunning Gold banding for that extra special touch </dd>\r\n<dd>Featuring a beautiful Ornamental, Expressive pattern</dd>\r\n</dl>', 2),
+(8, 'Mug', 'Annual Easter Edition mug 2021', 'assets/images/vb-eastermug-1.jpeg', 'assets/images/vb-eastermug-2.jpeg', '35.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>approx. 316g</dd>\r\n<dt>volume</dt>\r\n<dd>approx. 380ml</dd>\r\n</dl>', 0),
+(9, 'CoffeeCup', 'Anmut cappuccino cup\r\n', 'assets/images/vb-anmut-cappuccino-1.jpeg', '', '85.00', '<dl>\r\n<dt>weight</dt>\r\n<dd>approx. 190g</dd>\r\n<dt>volume</dt>\r\n<dd>approx. 400ml</dd>\r\n<dt>feature</dt>\r\n<dd>Timeless gracefulness and playful charm – the Villeroy & Boch Anmut collection offers all that and more. Inspired by designs from the fifties. Opt for graceful and attractive lines for breakfast or afternoon coffee. Impress your guests with this high-quality item.</dd>\r\n</dl>', 0),
+(11, 'Mug', 'Teema mug grey', 'assets/images/iittala-teema-1.jpeg', 'assets/images/iittala-teema-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>grey</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection. Collect a set.\r\n</dd>\r\n</dl>', 1),
+(12, 'TeaCup', 'Herend Fish Scale Teacup', 'assets/images/herendfishscale-1.jpeg', '', '95.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>5cm(H) x 11cm(W) x 9cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>200ml</dd>\r\n<dt>feature</dt>\r\n<dd>this elegant teacup is crafted from fine white porcelain and features Herend’s signature Fish Scale pattern.</dd>\r\n<dd>Individually hand-painted in Fortnum’s Eau de Nil and finished with 24 carat accents, it makes an elegant addition to your Afternoon Tea experience, or as a gift for a tea lover.\r\n</dd>\r\n</dl>', 0),
+(13, 'Tea Cup', 'Rory Dobner Teacup & Saucer', 'assets/images/cheshirecat-1.jpeg', 'assets/images/cheshirecat-2.jpeg', '95.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>5.7cm(H) x 8.4cm(W) x 6cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>190ml</dd>\r\n<dt>feature</dt>\r\n<dd>Made in England exclusively for Fortnum\'s, this Alice In Wonderland Cheshire Cat Teacup & Saucer is crafted from delicate fine bone china, and finished with a hand-painted illustration and 22-carat gold detailing. Simple, yet intricately detailed, it is perfect for teatime sipping.\r\n</dd>\r\n</dl>', 0),
+(14, 'Mug', 'Teema mug yellow', 'assets/images/teema-yellow-1.jpeg', 'assets/images/teema-yellow-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>yellow</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection.\r\n</dd>\r\n</dl>', 1),
+(15, 'Mug', 'Teema mug pink', 'assets/images/teema-pink-1.jpeg', 'assets/images/teema-pink-2.jpeg', '80.00', '<dl>\r\n<dt>colour</dt>\r\n<dd>pink</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>A versatile collection with endless combinations that are functional, durable and refined. It’s what one uses them for that makes it theirs. Teema is a classic icon of minimalist Nordic design.</dd>\r\n<dd>The Teema mug’s generous size makes it perfect for enjoying a favourite hot beverage like tea, coffee or latte. White brings clean sophistication to any table setting. Mix and match with the same colour or other colours in the Teema collection.\r\n</dd>\r\n</dl>', 1),
+(16, 'TeaCup', 'Whittard English Breakfast Tea Cup', 'assets/images/whittard-chelsea-garden-1.jpeg', 'assets/images/whittard-chelsea-garden-2.jpeg', '16.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>6cm(H) x 10.5cm(W) x 4.5cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>100ml</dd>\r\n<dt>feature</dt>\r\n<dd>We’ve brought quite the teacup collection to our beautiful Tea Discoveries range with dainty fine bone china cups and saucers to complement the delightful Tea Discoveries blends. Inspired by vintage patterns with a nod to afternoon tea’s celebrated heritage, this is a pairing to be treasured.\r\n</dd>\r\n</dl>', 0),
+(17, 'Mug', 'Alice in Wonderland Tea Party Mug', 'assets/images/whittard-alice-1.jpeg', 'assets/images/whittard-alice-2.jpeg', '10.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>9cm(H) x 11.5cm(W) x 8cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>Featuring the original illustrations from Lewis Carroll’s Alice’s Adventures in Wonderland, our quirky collection of fine bone china has been designed exclusively for Whittard.\r\n</dd>\r\n</dl>', 3),
+(18, 'Mug', 'Alice in Wonderland Alice Mug', 'assets/images/whittard-flamingo-1.jpeg', 'assets/images/whittard-flamingo-2.jpeg', '10.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>9cm(H) x 11.5cm(W) x 8cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>Featuring the original illustrations from Lewis Carroll’s Alice’s Adventures in Wonderland, our quirky collection of fine bone china has been designed exclusively for Whittard.\r\n</dd>\r\n</dl>', 3),
+(19, 'Mug', 'Alice in Wonderland Queen of Hearts Mug', 'assets/images/whittard-queen-1.jpeg', 'assets/images/whittard-queen-2.jpeg', '10.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>9cm(H) x 11.5cm(W) x 8cm(D)</dd>\r\n<dt>volume</dt>\r\n<dd>300ml</dd>\r\n<dt>feature</dt>\r\n<dd>Featuring the original illustrations from Lewis Carroll’s Alice’s Adventures in Wonderland, our quirky collection of fine bone china has been designed exclusively for Whittard.\r\n</dd>\r\n</dl>', 3),
+(20, 'CoffeeCup', 'Fortnum\'s Coffee Cup & Saucer, Green', 'assets/images/fortum-green-1.jpeg', '', '50.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>5.9cm(H) x 12cm(D) x 12cm(W)</dd>\r\n<dt>feature</dt>\r\n<dd>This striking bone china coffee cup and saucer are designed to match the vivid green tin for Fortnum\'s Sandringham Blend Coffee, originally produced for Queen Alexandra. Made in Stoke-on-Trent, using the finest bone china, and finished in gold, this coffee cup and saucer set makes a queenly addition to the coffee table. Supplied with gift box.\r\n</dd>\r\n</dl>', 0),
+(21, 'TeaCup', 'Cloverleaf Teacup & Saucer', 'assets/images/fortum-clove-1.jpeg', 'assets/images/fortum-clove-2.jpeg', '99.00', '<dl>\r\n<dt>Dimensions</dt>\r\n<dd>8.2cm(H) x 4.5cm(D) x 15cm(W)</dd>\r\n<dt>feature</dt>\r\n<dd>Start your morning by serving your tea in this elegant teacup and saucer set.\r\n\r\nThe design has been inspired by the Royal Blend Tea Caddy, the blend for which was originally created in the early 1900s for King Edward VII. The typical Edwardian profile of the bone china pieces marries beautifully with the design.\r\n</dd>\r\n</dl>', 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +253,8 @@ CREATE TABLE `shop_options` (
 
 INSERT INTO `shop_options` (`option_id`, `option_name`) VALUES
 (1, 'teema mug'),
-(2, 'wonderlust');
+(2, 'wonderlust'),
+(3, 'whittard-alice');
 
 -- --------------------------------------------------------
 
@@ -256,7 +281,9 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `pass`, `reg
 (25, 'Andy', 'Smith', 'a.smith@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2021-04-09 21:58:49'),
 (24, 'Julie', 'Andrews', 'julie.andrews@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2021-04-09 21:43:56'),
 (23, 'Justin', 'Bieber', 'j.bieber@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2021-03-25 12:15:01'),
-(26, 'Alex', 'Johnsons', 'a.johnsons@example.com', 'c9948dbbfc78f00c38487a737c0c232c014a2dad', '2021-04-10 20:19:13');
+(26, 'Alex', 'Johnsons', 'a.johnsons@example.com', 'c9948dbbfc78f00c38487a737c0c232c014a2dad', '2021-04-10 20:19:13'),
+(27, 'andy', 'johnson', 'andy@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2021-04-11 00:20:57'),
+(28, 'becky', 'thomas', 'becky.thomas@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2021-04-11 00:33:24');
 
 --
 -- Indexes for dumped tables
@@ -325,52 +352,52 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `discussion_likes`
 --
 ALTER TABLE `discussion_likes`
-  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `like_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `forum`
 --
 ALTER TABLE `forum`
-  MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `post_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `forum_images`
 --
 ALTER TABLE `forum_images`
-  MODIFY `fi_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `fi_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `order_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_contents`
 --
 ALTER TABLE `order_contents`
-  MODIFY `content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `content_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `product_rates`
 --
 ALTER TABLE `product_rates`
-  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `item_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `item_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `shop_options`
 --
 ALTER TABLE `shop_options`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
