@@ -3,15 +3,18 @@
 # Function to load specified or default URL.
 function load( $page = 'login.php' )
 {
-  # Begin URL with protocol, domain, and current directory.
-  $url = 'http://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER['REQUEST_URI']) ;
+  $scheme='http';
+  if(isset($_SERVER['HTTPS'])) $scheme = 'https';
+  $url = $scheme . '://' . $_SERVER[ 'HTTP_HOST' ] . dirname( $_SERVER[ 'PHP_SELF' ] ) ;
 
-  $Url = $_SERVER['REQUEST_URI'];
-  $parts = parse_url($url);
-  
-  $newUrl = $parts['scheme'] . '://' . $parts['host'] . ':8888' . $parts['path'] . '/' . $page;
+  # Remove trailing slashes then append page name to URL.
+  $url = rtrim( $url, '/\\' ) ;
 
-  header( "Location: $newUrl" ) ; 
+  echo $url;
+  $url .= '/' . $page ;
+
+  # Execute redirect then quit. 
+  header( "Location: $url" ) ;
   exit() ;
 }
 
